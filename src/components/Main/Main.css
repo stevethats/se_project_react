@@ -1,0 +1,20 @@
+@import url(../../vendor/fonts.css);
+
+.cards {
+  font-family: "Cabinet Grotesk";
+}
+
+.cards__text {
+  margin: 40px 0 34px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+}
+
+.cards__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
