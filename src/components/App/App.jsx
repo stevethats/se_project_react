@@ -18,7 +18,7 @@ function App() {
     city: "",
   });
   const [activeModal, setAcitveModal] = React.useState("");
-  const [selectedCard, setSelectedCard] = React.useState("");
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   React.useEffect(() => {
     if (location.latitude && location.longitude) {
@@ -27,7 +27,7 @@ function App() {
           const filteredData = filterDataFromWeatherApi(data);
           setWeatherData(filteredData);
         })
-        .catch((err) => console.log(err));
+        .catch(console.error);
     }
   }, []);
 
@@ -78,19 +78,37 @@ function App() {
         <fieldset className="modal__radio-btns">
           <legend className="modal__legend">Select the weather type:</legend>
           <label className="modal__label modal__input_type_radio" htmlFor="hot">
-            <input className="modal__radio-input" type="radio" id="hot" /> Hot
+            <input
+              className="modal__radio-input"
+              type="radio"
+              id="hot"
+              name="weather-type"
+            />{" "}
+            Hot
           </label>
           <label
             className="modal__label modal__input_type_radio"
             htmlFor="warm"
           >
-            <input className="modal__radio-input" type="radio" id="warm" /> Warm
+            <input
+              className="modal__radio-input"
+              type="radio"
+              id="warm"
+              name="weather-type"
+            />{" "}
+            Warm
           </label>
           <label
             className="modal__label modal__input_type_radio"
             htmlFor="cold"
           >
-            <input className="modal__radio-input" type="radio" id="cold" /> Cold
+            <input
+              className="modal__radio-input"
+              type="radio"
+              id="cold"
+              name="weather-type"
+            />{" "}
+            Cold
           </label>
         </fieldset>
       </ModalWithForm>
