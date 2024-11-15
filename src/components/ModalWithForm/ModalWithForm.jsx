@@ -15,7 +15,7 @@ function ModalWithForm({
           className="modal__close"
           type="button"
           onClick={handleCloseClick}
-        ></button>
+        />
         <form className="modal__form">
           {children}
           <button className="modal__submit" type="submit">
