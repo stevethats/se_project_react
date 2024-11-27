@@ -10,19 +10,23 @@ const AddItemModal = ({
 }) => {
   const [name, setName] = React.useState("");
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
   const [link, setLink] = React.useState("");
   const handleLinkChange = (e) => {
-    console.log(e.target.value);
     setLink(e.target.value);
   };
 
+  const [weather, setWeather] = React.useState("");
+  const handleWeatherChange = (e) => {
+    setWeather(e.target.value);
+  };
+
   const handleSubmit = (e) => {
-    e.preventDeafult();
-    onAddItem({ name, link });
+    e.preventDefault();
+    onAddItem({ name: name, weather: weather, imageUrl: link });
+    onCloseClick();
   };
 
   return (
@@ -55,7 +59,7 @@ const AddItemModal = ({
           onChange={handleLinkChange}
         ></input>
       </label>
-      <fieldset className="modal__radio-btns">
+      <fieldset className="modal__radio-btns" onChange={handleWeatherChange}>
         <legend className="modal__legend">Select the weather type:</legend>
         <label className="modal__label modal__input_type_radio" htmlFor="hot">
           <input
@@ -63,6 +67,7 @@ const AddItemModal = ({
             type="radio"
             id="hot"
             name="weather-type"
+            value="hot"
           />{" "}
           Hot
         </label>
@@ -72,6 +77,7 @@ const AddItemModal = ({
             type="radio"
             id="warm"
             name="weather-type"
+            value="warm"
           />{" "}
           Warm
         </label>
@@ -81,6 +87,7 @@ const AddItemModal = ({
             type="radio"
             id="cold"
             name="weather-type"
+            value="cold"
           />{" "}
           Cold
         </label>

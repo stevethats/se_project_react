@@ -1,0 +1,28 @@
+.modal__content_type_delete {
+  text-align: center;
+  max-width: 670px;
+  max-height: 280px;
+  padding: 60px;
+}
+
+.modal__caption {
+  margin: 0;
+}
+
+.modal__delete_type_confirm {
+  width: 100%;
+  margin: 40px 0 20px;
+}
+
+.modal__cancel {
+  border: none;
+  background-color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal__cancel:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
