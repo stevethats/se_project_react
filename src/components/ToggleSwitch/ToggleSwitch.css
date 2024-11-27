@@ -30,25 +30,39 @@
 .switch__slider-F {
   top: 0;
   left: 28px;
+  transition: left 0.2s linear 0s;
 }
 
 .switch__slider-C {
   top: 0;
   left: 0;
+  transition: left 0.2s linear 0s;
 }
 
-.switch__active {
-  color: #fff;
+.switch__slider-C:hover {
+  left: 2px;
+}
+
+.switch__slider-F:hover {
+  left: 26px;
 }
 
 .switch__temp-C {
   position: absolute;
   top: -7px;
   left: 9px;
+  color: #7e7e7e;
+  transition: color 0.2s linear 0s;
 }
 
 .switch__temp-F {
   position: absolute;
   top: -7px;
   left: 38px;
+  color: #7e7e7e;
+  transition: color 0.2s linear 0s;
+}
+
+.switch__active {
+  color: #fff;
 }

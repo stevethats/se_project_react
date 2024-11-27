@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
-import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
-import ItemModal from "../ItemModal/ItemModal.jsx";
 import { apiKey, location } from "../../utils/constants.js";
+
+import Profile from "../Profile/Profile.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
+
 import {
   getForecastWeather,
   filterDataFromWeatherApi,
 } from "../../utils/weatherApi.js";
+import { getItems } from "../../utils/api.js";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 
 function App() {
   const [weatherData, setWeatherData] = React.useState({
@@ -19,17 +26,9 @@ function App() {
   });
   const [activeModal, setAcitveModal] = React.useState("");
   const [selectedCard, setSelectedCard] = React.useState({});
-
-  React.useEffect(() => {
-    if (location.latitude && location.longitude) {
-      getForecastWeather(location, apiKey)
-        .then((data) => {
-          const filteredData = filterDataFromWeatherApi(data);
-          setWeatherData(filteredData);
-        })
-        .catch(console.error);
-    }
-  }, []);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] =
+    React.useState("F");
+  const [clothingItems, setClothingItems] = React.useState([]);
 
   const handleCardClick = (card) => {
     setAcitveModal("preview");
@@ -44,79 +43,85 @@ function App() {
     setAcitveModal("");
   };
 
+  const onAddItem = (values) => {
+    console.log(values);
+  };
+
+  const handleToggleSwitchChange = () => {
+    if (currentTemperatureUnit === "C") {
+      setCurrentTemperatureUnit("F");
+    }
+
+    if (currentTemperatureUnit === "F") {
+      setCurrentTemperatureUnit("C");
+    }
+  };
+
+  //WeatherApi data gathering
+  React.useEffect(() => {
+    if (location.latitude && location.longitude) {
+      getForecastWeather(location, apiKey)
+        .then((data) => {
+          const filteredData = filterDataFromWeatherApi(data);
+          setWeatherData(filteredData);
+        })
+        .catch(console.error);
+    }
+  }, []);
+
+  //Local Api data gathering
+  React.useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
-      <div className="page__content">
-        <Header weatherData={weatherData} handleAddClick={handleAddClick} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
-        <Footer />
-      </div>
-      <ModalWithForm
-        buttonText="Add garment"
-        title="New garment"
-        isOpen={activeModal === "add-garment"}
-        handleCloseClick={closeActiveModal}
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <label className="modal__label" htmlFor="name">
-          Name {""}
-          <input
-            className="modal__input"
-            type="text"
-            id="name"
-            placeholder="Name"
-          ></input>
-        </label>
-        <label className="modal__label" htmlFor="imageUrl">
-          Image {""}
-          <input
-            className="modal__input"
-            type="url"
-            id="imageUrl"
-            placeholder="Image URL"
-          ></input>
-        </label>
-        <fieldset className="modal__radio-btns">
-          <legend className="modal__legend">Select the weather type:</legend>
-          <label className="modal__label modal__input_type_radio" htmlFor="hot">
-            <input
-              className="modal__radio-input"
-              type="radio"
-              id="hot"
-              name="weather-type"
-            />{" "}
-            Hot
-          </label>
-          <label
-            className="modal__label modal__input_type_radio"
-            htmlFor="warm"
-          >
-            <input
-              className="modal__radio-input"
-              type="radio"
-              id="warm"
-              name="weather-type"
-            />{" "}
-            Warm
-          </label>
-          <label
-            className="modal__label modal__input_type_radio"
-            htmlFor="cold"
-          >
-            <input
-              className="modal__radio-input"
-              type="radio"
-              id="cold"
-              name="weather-type"
-            />{" "}
-            Cold
-          </label>
-        </fieldset>
-      </ModalWithForm>
-      <ItemModal
-        isOpen={activeModal === "preview"}
-        card={selectedCard}
-        onCloseClick={closeActiveModal}
-      />
+        <div className="page__content">
+          <Header weatherData={weatherData} handleAddClick={handleAddClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  onAddClick={handleAddClick}
+                  onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
+        </div>
+        <AddItemModal
+          buttonText="Add garment"
+          title="New garment"
+          onCloseClick={closeActiveModal}
+          isOpen={activeModal === "add-garment"}
+          onAddItem={onAddItem}
+        />
+        <ItemModal
+          isOpen={activeModal === "preview"}
+          card={selectedCard}
+          onCloseClick={closeActiveModal}
+        />
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }

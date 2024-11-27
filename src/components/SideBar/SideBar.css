@@ -1,0 +1,17 @@
+@import url(../../vendor/fonts.css);
+
+.sidebar {
+  display: flex;
+  gap: 16px;
+  width: 345px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+  align-items: center;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+}

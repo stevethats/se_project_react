@@ -48,6 +48,14 @@
   gap: 12px;
 }
 
+.header__profile-link {
+  text-decoration: none;
+}
+
+.header__profile-link:visited {
+  color: #000;
+}
+
 .header__username {
   font-weight: 700;
   font-size: 20px;

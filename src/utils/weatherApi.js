@@ -16,7 +16,10 @@ const filterDataFromWeatherApi = (data) => {
   }
   const weather = {};
   weather.city = data.name;
-  weather.temp = { F: Math.round(data.main.temp) };
+  weather.temp = {
+    F: Math.round(data.main.temp),
+    C: Math.round((data.main.temp - 32) * (5 / 9)),
+  };
   weather.type = getWeatherType(weather.temp.F);
   weather.condition = data.weather[0].main.toLowerCase();
   weather.isDay = isDay(data.sys, Date.now() / 1000);

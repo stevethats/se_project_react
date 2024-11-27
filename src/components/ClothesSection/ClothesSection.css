@@ -1,0 +1,39 @@
+@import url(../../vendor/fonts.css);
+
+.clothes-section {
+  font-family: "Cabinet Grotesk";
+}
+
+.clothes-section__nav {
+  display: flex;
+  gap: 20px;
+}
+
+.clothes-section__text {
+  margin: 16px 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+}
+
+.clothes-section__add-button {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+  background-color: #f3f3f3;
+  color: rgb(0, 0, 0, 0.6);
+  border: none;
+}
+
+.clothes-section__add-button:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.clothes-section__cards {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
