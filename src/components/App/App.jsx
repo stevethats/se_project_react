@@ -54,12 +54,15 @@ function App() {
   };
 
   const onAddItem = (item) => {
-    setClothingItems([item, ...clothingItems]);
-    createClothingCard(item);
+    createClothingCard(item)
+      .then(() => getItems())
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
   };
 
   const handleDeleteItem = () => {
-    console.log(selectedCard);
     deleteClothingCard(selectedCard._id);
     setClothingItems(
       clothingItems.filter((item) => {
