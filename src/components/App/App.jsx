@@ -34,6 +34,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
     React.useState("F");
   const [clothingItems, setClothingItems] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleCardClick = (card) => {
     setAcitveModal("preview");
@@ -53,23 +54,46 @@ function App() {
     setAcitveModal("");
   };
 
+  //Close Active Modal with Esc
+  React.useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
   const onAddItem = (item) => {
+    setIsLoading(true);
     createClothingCard(item)
-      .then(() => getItems())
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems([data, ...clothingItems]);
+        closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleDeleteItem = () => {
-    deleteClothingCard(selectedCard._id);
-    setClothingItems(
-      clothingItems.filter((item) => {
-        return item._id !== selectedCard._id;
+    deleteClothingCard(selectedCard._id)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((item) => {
+            return item._id !== selectedCard._id;
+          })
+        );
+        closeActiveModal();
       })
-    );
-    closeActiveModal();
+      .catch(console.error);
   };
 
   const handleToggleSwitchChange = () => {
@@ -135,7 +159,7 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          buttonText="Add garment"
+          buttonText={isLoading ? "Saving..." : "Add garment"}
           title="New garment"
           onCloseClick={closeActiveModal}
           isOpen={activeModal === "add-garment"}
