@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import Modal from "../Modal/Modal.jsx";
 
 function ModalWithForm({
   children,
@@ -9,22 +10,15 @@ function ModalWithForm({
   onSubmit,
 }) {
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
-      <div className="modal__content">
-        <h2 className="modal__title">{title}</h2>
-        <button
-          className="modal__close"
-          type="button"
-          onClick={handleCloseClick}
-        />
-        <form className="modal__form" onSubmit={onSubmit}>
-          {children}
-          <button className="modal__submit" type="submit">
-            {buttonText}
-          </button>
-        </form>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} onClose={handleCloseClick}>
+      <h2 className="modal__title">{title}</h2>
+      <form className="modal__form" onSubmit={onSubmit}>
+        {children}
+        <button className="modal__submit" type="submit">
+          {buttonText}
+        </button>
+      </form>
+    </Modal>
   );
 }
 
