@@ -1,5 +1,6 @@
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import useForm from "../../hooks/useForm.jsx";
 
 const AddItemModal = ({
   onCloseClick,
@@ -8,24 +9,11 @@ const AddItemModal = ({
   isOpen,
   onAddItem,
 }) => {
-  const [name, setName] = React.useState("");
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const [link, setLink] = React.useState("");
-  const handleLinkChange = (e) => {
-    setLink(e.target.value);
-  };
-
-  const [weather, setWeather] = React.useState("");
-  const handleWeatherChange = (e) => {
-    setWeather(e.target.value);
-  };
+  const { values, handleChange, setValues } = useForm({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name: name, weather: weather, imageUrl: link });
+    onAddItem({ ...values });
   };
 
   return (
@@ -43,8 +31,9 @@ const AddItemModal = ({
           type="text"
           id="name"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name}
+          name="name"
+          onChange={handleChange}
         ></input>
       </label>
       <label className="modal__label" htmlFor="imageUrl">
@@ -54,18 +43,19 @@ const AddItemModal = ({
           type="url"
           id="imageUrl"
           placeholder="Image URL"
-          value={link}
-          onChange={handleLinkChange}
+          name="imageUrl"
+          value={values.link}
+          onChange={handleChange}
         ></input>
       </label>
-      <fieldset className="modal__radio-btns" onChange={handleWeatherChange}>
+      <fieldset className="modal__radio-btns" onChange={handleChange}>
         <legend className="modal__legend">Select the weather type:</legend>
         <label className="modal__label modal__input_type_radio" htmlFor="hot">
           <input
             className="modal__radio-input"
             type="radio"
             id="hot"
-            name="weather-type"
+            name="weather"
             value="hot"
           />{" "}
           Hot
@@ -75,7 +65,7 @@ const AddItemModal = ({
             className="modal__radio-input"
             type="radio"
             id="warm"
-            name="weather-type"
+            name="weather"
             value="warm"
           />{" "}
           Warm
@@ -85,7 +75,7 @@ const AddItemModal = ({
             className="modal__radio-input"
             type="radio"
             id="cold"
-            name="weather-type"
+            name="weather"
             value="cold"
           />{" "}
           Cold
