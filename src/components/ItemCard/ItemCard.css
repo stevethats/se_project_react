@@ -18,10 +18,11 @@
 }
 
 .item-card__image {
-  max-width: 323px;
-  max-height: 326px;
+  width: 323px;
+  height: 326px;
   border-radius: 12px;
   border: 1px solid rgb(0 0 0 / 0.3);
+  object-fit: cover;
 }
 
 .item-card__image:hover {

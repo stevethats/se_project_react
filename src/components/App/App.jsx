@@ -12,6 +12,8 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.jsx";
 
+import useForm from "../../hooks/useForm.jsx";
+
 import {
   getForecastWeather,
   filterDataFromWeatherApi,
@@ -35,6 +37,7 @@ function App() {
     React.useState("F");
   const [clothingItems, setClothingItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const { values, handleChange, setValues } = useForm({});
 
   const handleCardClick = (card) => {
     setAcitveModal("preview");
@@ -54,27 +57,12 @@ function App() {
     setAcitveModal("");
   };
 
-  //Close Active Modal with Esc
-  React.useEffect(() => {
-    if (!activeModal) return;
-
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        closeActiveModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscClose);
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
-  }, [activeModal]);
-
   const onAddItem = (item) => {
     setIsLoading(true);
     createClothingCard(item)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
+        setValues({});
         closeActiveModal();
       })
       .catch(console.error)
@@ -164,6 +152,8 @@ function App() {
           onCloseClick={closeActiveModal}
           isOpen={activeModal === "add-garment"}
           onAddItem={onAddItem}
+          handleChange={handleChange}
+          values={values}
         />
         <ItemModal
           isOpen={activeModal === "preview"}

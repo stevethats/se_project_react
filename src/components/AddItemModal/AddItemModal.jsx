@@ -1,6 +1,5 @@
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
-import useForm from "../../hooks/useForm.jsx";
 
 const AddItemModal = ({
   onCloseClick,
@@ -8,9 +7,9 @@ const AddItemModal = ({
   title,
   isOpen,
   onAddItem,
+  handleChange,
+  values,
 }) => {
-  const { values, handleChange } = useForm({});
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItem({ ...values });
@@ -31,7 +30,7 @@ const AddItemModal = ({
           type="text"
           id="name"
           placeholder="Name"
-          value={values.name}
+          value={values.name || ""}
           name="name"
           onChange={handleChange}
         ></input>
@@ -44,7 +43,7 @@ const AddItemModal = ({
           id="imageUrl"
           placeholder="Image URL"
           name="imageUrl"
-          value={values.link}
+          value={values.imageUrl || ""}
           onChange={handleChange}
         ></input>
       </label>

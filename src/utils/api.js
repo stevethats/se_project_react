@@ -31,4 +31,4 @@ function deleteClothingCard(id) {
   });
 }
 
-export { getItems, createClothingCard, deleteClothingCard };
+export { getItems, createClothingCard, deleteClothingCard, request };
