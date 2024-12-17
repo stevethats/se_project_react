@@ -11,7 +11,7 @@
 
 **Intro**
 
-This project is created to display working knowledge on how to interact with APIs (obtaining and using data) to create and use funcitonal and class components. It also uses React to have the webpage respond to user to changes.
+This project is created to display working knowledge on how to interact with APIs (obtaining and using data) to create and use functional and class components. It also uses React to have the webpage respond to user to changes.
 The webpage focuses on creating a weather-based site to recommend items for the user to wear based on location and forecast. It has functionality of creating and deleting items, and user profile interaction.
 
 **Links**
