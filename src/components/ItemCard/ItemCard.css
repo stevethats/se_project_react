@@ -4,8 +4,16 @@
   justify-content: center;
 }
 
-.item-card__name {
+.item-card__header {
   position: absolute;
+  margin: 0;
+  top: 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.item-card__name {
   margin: 0;
   top: 15px;
   border-radius: 4px;
@@ -15,6 +23,26 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
+}
+
+.item-card__like-button {
+  margin: 0 0 0 10px;
+  border: none;
+  background: transparent url("../../assets/like-button.svg") center no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 15px;
+}
+
+.item-card__like-button:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.item-card__like-button_active {
+  background: transparent url("../../assets/like-button-filled.svg") center
+    no-repeat;
+  background-size: contain;
 }
 
 .item-card__image {

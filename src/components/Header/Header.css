@@ -28,6 +28,34 @@
   line-height: 24px;
 }
 
+.header__sign-up-btn {
+  margin: 0 0 0 20px;
+  border: none;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.header__sign-up-btn:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.header__login-btn {
+  margin: 0 0 0 20px;
+  border: none;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.header__login-btn:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
 .header__add-clothes-btn {
   margin: 0 20px;
   border: none;
@@ -65,4 +93,17 @@
 .header__avatar {
   height: 40px;
   width: 40px;
+  background-color: aqua;
+  border-radius: 30px;
+}
+
+.header__avatar-text {
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  color: #000;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

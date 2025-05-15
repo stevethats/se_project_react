@@ -1,3 +1,5 @@
+import React from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ClothesSection.css";
 // Use defaultClothingItems for testing
 // import { defaultClothingItems } from "../../utils/constants";
@@ -5,6 +7,10 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
 function ClothesSection({ onAddClick, onCardClick, clothingItems }) {
+  const { selectedCard, currentUser } = React.useContext(CurrentUserContext);
+
+  const isOwn = selectedCard.owner === currentUser._id;
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__nav">
@@ -15,9 +21,11 @@ function ClothesSection({ onAddClick, onCardClick, clothingItems }) {
       </div>
       <ul className="clothes-section__cards">
         {clothingItems.map((item) => {
-          return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-          );
+          if (isOwn) {
+            return (
+              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            );
+          }
         })}
       </ul>
     </div>
