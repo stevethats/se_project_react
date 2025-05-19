@@ -31,7 +31,7 @@ const EditProfileModal = ({
         <input
           className="modal__input"
           type="text"
-          id="name"
+          id="editProfile-name"
           placeholder="Name"
           value={values.name || ""}
           name="name"
@@ -43,7 +43,7 @@ const EditProfileModal = ({
         <input
           className="modal__input"
           type="url"
-          id="imageUrl"
+          id="editProfile-imageUrl"
           placeholder="Image URL"
           name="avatar"
           value={values.avatar || ""}

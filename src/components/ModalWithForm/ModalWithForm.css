@@ -122,3 +122,19 @@
 .modal__submit_diabled {
   background-color: #0000004d;
 }
+
+.modal__redirect-button {
+  background-color: transparent;
+  color: #000;
+  opacity: 50%;
+  border: none;
+  padding: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-left: 12px;
+}
+
+.modal__redirect-button:hover {
+  cursor: pointer;
+}

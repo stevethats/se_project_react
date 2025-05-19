@@ -202,6 +202,16 @@ function App() {
     setAcitveModal("");
   };
 
+  const handleRedirect = () => {
+    if (activeModal === "login") {
+      closeActiveModal();
+      setAcitveModal("register");
+    } else {
+      closeActiveModal();
+      setAcitveModal("login");
+    }
+  };
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") {
       setCurrentTemperatureUnit("F");
@@ -251,7 +261,13 @@ function App() {
 
   return (
     <CurrentUserContext.Provider
-      value={{ currentUser, isLoggedIn, selectedCard, setSelectedCard }}
+      value={{
+        currentUser,
+        isLoggedIn,
+        selectedCard,
+        setSelectedCard,
+        activeModal,
+      }}
     >
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
@@ -300,6 +316,7 @@ function App() {
             onCloseClick={closeActiveModal}
             isOpen={activeModal === "register"}
             handleRegistration={handleRegistration}
+            handleRedirect={handleRedirect}
           ></RegisterModal>
           <LoginModal
             buttonText={isLoading ? "Loading..." : "Login"}
@@ -307,6 +324,7 @@ function App() {
             onCloseClick={closeActiveModal}
             isOpen={activeModal === "login"}
             handleLogin={handleLogin}
+            handleRedirect={handleRedirect}
           ></LoginModal>
           <EditProfileModal
             buttonText={isLoading ? "Saving..." : "Submit"}

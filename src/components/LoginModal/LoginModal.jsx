@@ -7,15 +7,21 @@ const LoginModal = ({
   title,
   isOpen,
   handleLogin,
+  handleRedirect,
 }) => {
   const { values, handleChange, setValues } = useForm({});
+  const resetForm = () => {
+    setValues({});
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const resetForm = () => {
-      setValues({});
-    };
     handleLogin({ ...values }, resetForm);
+  };
+
+  const handleRedirectClick = (e) => {
+    handleRedirect();
+    resetForm();
   };
 
   return (
@@ -25,13 +31,14 @@ const LoginModal = ({
       isOpen={isOpen}
       handleCloseClick={onCloseClick}
       onSubmit={handleSubmit}
+      handleRedirectClick={handleRedirectClick}
     >
       <label className="modal__label" htmlFor="email">
         Email {""}
         <input
           className="modal__input"
           type="email"
-          id="email"
+          id="login-email"
           placeholder="Email"
           name="email"
           value={values.email || ""}
@@ -43,7 +50,7 @@ const LoginModal = ({
         <input
           className="modal__input"
           type="password"
-          id="password"
+          id="login-password"
           placeholder="Password"
           name="password"
           value={values.password || ""}

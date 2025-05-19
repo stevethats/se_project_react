@@ -32,7 +32,7 @@ const AddItemModal = ({
         <input
           className="modal__input"
           type="text"
-          id="name"
+          id="addItem-name"
           placeholder="Name"
           value={values.name || ""}
           name="name"
@@ -44,7 +44,7 @@ const AddItemModal = ({
         <input
           className="modal__input"
           type="url"
-          id="imageUrl"
+          id="addItem-imageUrl"
           placeholder="Image URL"
           name="imageUrl"
           value={values.imageUrl || ""}

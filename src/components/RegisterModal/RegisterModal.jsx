@@ -7,15 +7,21 @@ const RegisterModal = ({
   title,
   isOpen,
   handleRegistration,
+  handleRedirect,
 }) => {
   const { values, handleChange, setValues } = useForm({});
+  const resetForm = () => {
+    setValues({});
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const resetForm = () => {
-      setValues({});
-    };
     handleRegistration({ ...values }, resetForm);
+  };
+
+  const handleRedirectClick = () => {
+    handleRedirect();
+    resetForm();
   };
 
   return (
@@ -24,6 +30,7 @@ const RegisterModal = ({
       title={title}
       isOpen={isOpen}
       handleCloseClick={onCloseClick}
+      handleRedirectClick={handleRedirectClick}
       onSubmit={handleSubmit}
     >
       <label className="modal__label" htmlFor="name">
@@ -31,7 +38,7 @@ const RegisterModal = ({
         <input
           className="modal__input"
           type="text"
-          id="name"
+          id="register-name"
           placeholder="Name"
           value={values.name || ""}
           name="name"
@@ -43,7 +50,7 @@ const RegisterModal = ({
         <input
           className="modal__input"
           type="url"
-          id="imageUrl"
+          id="register-imageUrl"
           placeholder="Image URL"
           name="avatar"
           value={values.avatar || ""}
@@ -54,8 +61,8 @@ const RegisterModal = ({
         Email* {""}
         <input
           className="modal__input"
-          type="email"
-          id="email"
+          type="-email"
+          id="register-email"
           placeholder="Email"
           name="email"
           value={values.email || ""}
@@ -67,7 +74,7 @@ const RegisterModal = ({
         <input
           className="modal__input"
           type="password"
-          id="password"
+          id="register-password"
           placeholder="Password"
           name="password"
           value={values.password || ""}
