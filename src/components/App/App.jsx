@@ -251,7 +251,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider
-      value={{ currentUser, isLoggedIn, selectedCard }}
+      value={{ currentUser, isLoggedIn, selectedCard, setSelectedCard }}
     >
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
@@ -283,6 +283,7 @@ function App() {
                     <Profile
                       onAddClick={handleAddClick}
                       onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
                       clothingItems={clothingItems}
                       handleEditProfileClick={handleEditProfileClick}
                       handleLogout={handleLogout}
