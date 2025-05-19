@@ -28,9 +28,13 @@ function createClothingCard(item, token) {
   });
 }
 
-function deleteClothingCard(id) {
+function deleteClothingCard(id, token) {
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 
