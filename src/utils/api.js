@@ -39,7 +39,6 @@ function deleteClothingCard(id, token) {
 }
 
 function addCardLike(id, token) {
-  //add user's id to the card's likes array
   return request(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {

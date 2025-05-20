@@ -1,3 +1,8 @@
+import React from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+
+import { useState } from "react";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import useForm from "../../hooks/useForm.jsx";
 
@@ -8,6 +13,7 @@ const EditProfileModal = ({
   isOpen,
   handleEditProfile,
 }) => {
+  const { currentUser } = React.useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({});
 
   const handleSubmit = (e) => {
@@ -33,7 +39,7 @@ const EditProfileModal = ({
           type="text"
           id="editProfile-name"
           placeholder="Name"
-          value={values.name || ""}
+          value={values.name ?? currentUser.name}
           name="name"
           onChange={handleChange}
         ></input>
@@ -46,7 +52,7 @@ const EditProfileModal = ({
           id="editProfile-imageUrl"
           placeholder="Image URL"
           name="avatar"
-          value={values.avatar || ""}
+          value={values.avatar ?? currentUser.avatar}
           onChange={handleChange}
         ></input>
       </label>
