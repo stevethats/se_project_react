@@ -39,7 +39,7 @@ const EditProfileModal = ({
           type="text"
           id="editProfile-name"
           placeholder="Name"
-          value={values.name ?? currentUser.name}
+          value={values.name ?? currentUser.name ?? ""}
           name="name"
           onChange={handleChange}
         ></input>
@@ -52,7 +52,7 @@ const EditProfileModal = ({
           id="editProfile-imageUrl"
           placeholder="Image URL"
           name="avatar"
-          value={values.avatar ?? currentUser.avatar}
+          value={values.avatar ?? currentUser.avatar ?? ""}
           onChange={handleChange}
         ></input>
       </label>

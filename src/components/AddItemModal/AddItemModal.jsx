@@ -1,4 +1,3 @@
-import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import useForm from "../../hooks/useForm.jsx";
 
@@ -27,7 +26,7 @@ const AddItemModal = ({
       handleCloseClick={onCloseClick}
       onSubmit={handleSubmit}
     >
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label">
         Name {""}
         <input
           className="modal__input"
@@ -39,7 +38,7 @@ const AddItemModal = ({
           onChange={handleChange}
         ></input>
       </label>
-      <label className="modal__label" htmlFor="imageUrl">
+      <label className="modal__label">
         Image {""}
         <input
           className="modal__input"

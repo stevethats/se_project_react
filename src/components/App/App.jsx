@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 
@@ -46,7 +46,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [activeModal, setAcitveModal] = React.useState("");
+  const [activeModal, setActiveModal] = React.useState("");
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
     React.useState("F");
@@ -55,6 +55,8 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = ({ email, password }, resetForm) => {
     setIsLoading(true);
@@ -70,12 +72,12 @@ function App() {
               setToken(data.token);
               setCurrentUser(userData.data);
               setIsLoggedIn(true);
+              resetForm();
+              closeActiveModal();
+              const redirectPath = location.state?.from?.pathname || "/";
+              navigate(redirectPath);
             })
             .catch(console.error);
-          resetForm();
-          closeActiveModal();
-          const redirectPath = location.state?.from?.pathname || "/";
-          useNavigate(redirectPath);
         }
       })
       .catch(console.error)
@@ -174,42 +176,42 @@ function App() {
   };
 
   const handleRegistrationClick = () => {
-    setAcitveModal("register");
+    setActiveModal("register");
   };
 
   const handleLoginClick = () => {
-    setAcitveModal("login");
+    setActiveModal("login");
   };
 
   const handleEditProfileClick = () => {
-    setAcitveModal("edit-profile");
+    setActiveModal("edit-profile");
   };
 
   const handleCardClick = (card) => {
-    setAcitveModal("preview");
+    setActiveModal("preview");
     setSelectedCard(card);
   };
 
   const handleAddClick = () => {
-    setAcitveModal("add-garment");
+    setActiveModal("add-garment");
   };
 
   const handleConfirmDelete = () => {
     closeActiveModal();
-    setAcitveModal("confirm");
+    setActiveModal("confirm");
   };
 
   const closeActiveModal = () => {
-    setAcitveModal("");
+    setActiveModal("");
   };
 
   const handleRedirect = () => {
     if (activeModal === "login") {
       closeActiveModal();
-      setAcitveModal("register");
+      setActiveModal("register");
     } else {
       closeActiveModal();
-      setAcitveModal("login");
+      setActiveModal("login");
     }
   };
 

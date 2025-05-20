@@ -1,37 +1,33 @@
-export const BASE_URL = "http://localhost:3001"; //base url for api
+import { baseUrl, request } from "./api";
 
-export const register = (name, avatar, email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+const register = (name, avatar, email, password) => {
+  return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
 
-export const login = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+const login = (email, password) => {
+  return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
 
-export const checkTokenValidityWithServer = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+const checkTokenValidityWithServer = (token) => {
+  return request(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
+
+export { register, login, checkTokenValidityWithServer };

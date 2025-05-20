@@ -85,6 +85,7 @@
 }
 
 .header__username {
+  color: #000;
   font-weight: 700;
   font-size: 20px;
   line-height: 24.8px;

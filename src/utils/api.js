@@ -77,4 +77,5 @@ export {
   removeCardLike,
   updateUserInfo,
   request,
+  baseUrl,
 };
