@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.zanity.net"
+    : "http://localhost:3001";
 // run this to use local database:
 // json-server --watch db.json --id _id --port 3001
 
